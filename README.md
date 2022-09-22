@@ -8,6 +8,7 @@ URL Shortener app using NodeJS and Mongodb.
 - Tests with Jest
 - Exposing app with Express
 - Postman Request Import
+- Fake/InMemory Database for Tests
 
 ## API Example
 

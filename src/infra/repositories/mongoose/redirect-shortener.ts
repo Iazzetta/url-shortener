@@ -1,9 +1,6 @@
 import { connect } from "mongoose";
-import { nanoid } from "nanoid";
 import { RedirectShortenerRepository } from "../../../datalayer/contracts/redirect-shortener";
-import { Shortener } from "../../../domain/entities/shortener";
 import { Credentials } from "../../../presentation/helpers/credentials";
-import { generateExpiration } from "../../../presentation/helpers/generate-expiration";
 import { ShortenerSchema } from "./schemas/shortener";
 
 export class MongooseRedirectShortenerRepository implements RedirectShortenerRepository {
