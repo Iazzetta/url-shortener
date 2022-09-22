@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "31d30852-1b6b-4d06-bdab-ea1257482e3e",
+		"name": "url-shortener",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "long_url",
+							"value": "https://github.com/Iazzetta",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/shorten",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"shorten"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

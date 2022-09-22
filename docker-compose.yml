@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  url-shortener:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: base
+    volumes:
+      - ./src:/home/node/app/src
+    container_name: url-shortener
+    expose:
+      - '5000'
+    ports:
+      - '5000:5000'
+    command: npm start
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      PREFIX_URL: ${PREFIX_URL}
+      EXPIRATION_HOUR: ${EXPIRATION_HOUR}
