@@ -13,8 +13,26 @@ services:
       - '5000'
     ports:
       - '5000:5000'
+    depends_on:
+      - "redis"
     command: npm start
     environment:
       DATABASE_URL: ${DATABASE_URL}
       PREFIX_URL: ${PREFIX_URL}
       EXPIRATION_HOUR: ${EXPIRATION_HOUR}
+      ENV: production
+      
+  redis:
+    image: docker.io/bitnami/redis:7.0
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'redis_data:/bitnami/redis/data'
+
+volumes:
+  redis_data:
+    driver: local

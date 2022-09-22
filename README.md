@@ -6,6 +6,9 @@ URL Shortener app using NodeJS and Mongodb.
 
 - Clean Architecture in Typescript
 - Tests with Jest
+- Shorten URL
+- Redirect to URL
+- Redis to cache redirects
 - Exposing app with Express
 - Postman Request Import
 - Fake/InMemory Database for Tests
@@ -49,12 +52,18 @@ Create the .env file in the project root and add the necessary variables below:
 DATABASE_URL="mongodb://...."
 PREFIX_URL="www.us.com/"
 EXPIRATION_HOUR=24
+REDIS_URL="redis://redis:6379"
 ```
 
-## Run
+## Run Production
 
 ```bash
-$ docker-compose build
+$ docker-compose up --build
+```
+
+## Run Development
+```bash
+$ npm start
 ```
 
 ## Test
