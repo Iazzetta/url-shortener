@@ -9,7 +9,7 @@ URL Shortener app using NodeJS and Mongodb.
 - Shorten URL
 - Redirect to URL
 - Redis to cache redirects
-- Exposing app with Express
+- Exposing API with Express
 - Postman Request Import
 - Fake/InMemory Database for Tests
 
