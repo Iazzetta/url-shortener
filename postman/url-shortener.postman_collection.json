@@ -1,38 +1,252 @@
 {
 	"info": {
-		"_postman_id": "31d30852-1b6b-4d06-bdab-ea1257482e3e",
-		"name": "url-shortener",
+		"_postman_id": "dc8f4f1a-174d-4ae0-b5aa-29307855ca42",
+		"name": "singapura",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "create",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "long_url",
-							"value": "https://github.com/Iazzetta",
-							"type": "text"
+			"name": "product",
+			"item": [
+				{
+					"name": "Create new",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Emprestimo Casa\",\r\n    \"code\": \"ECX\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/api/v1/registration/product",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"registration",
+								"product"
+							]
 						}
-					]
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:5000/shorten",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"shorten"
-					]
+				{
+					"name": "Get Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v1/registration/product?id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"registration",
+								"product"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "partner",
+			"item": [
+				{
+					"name": "Create new",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Banco X\",\r\n    \"code\": \"BCX\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/api/v1/registration/partner",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"registration",
+								"partner"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Partner",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v1/registration/partner?id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"registration",
+								"partner"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Integration Rules",
+			"item": [
+				{
+					"name": "Get Integration Rule",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v1/registration/integration_rules?partner_id=1",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"registration",
+								"integration_rules"
+							],
+							"query": [
+								{
+									"key": "partner_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new Integration Rule",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product_id\": 1,\r\n    \"partner_id\": 1,\r\n    \"authentication\":{\r\n       \"endpoint\":\"https://autenticacao.com.br\",\r\n       \"req_method\": \"GET\",\r\n       \"headers\":[\r\n          {\r\n             \"header_name\":\"Authentication\",\r\n             \"header_value\":\"Basic TOKENNDSNSADNAS\"\r\n          }\r\n       ],\r\n       \"return_fields_mapping\":[\r\n         {\r\n            \"internal\":\"dsadsa\",\r\n            \"external\":\"dsada\"\r\n         }\r\n      ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/api/v1/registration/integration_rules",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"registration",
+								"integration_rules"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "testing",
+			"item": [
+				{
+					"name": "Testing",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/test",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"test"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Integration",
+			"item": [
+				{
+					"name": "Init Integration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"calling_id\": \"2367\",\r\n    \"product_id\": 1,\r\n    \"client_data\": {\r\n        \"name\": \"Fabio Silva\",\r\n        \"email\": \"fabio@hotmail.com\",\r\n        \"documento_tipo\":  \"RG\",\r\n        \"documento_numero\": \"435345345\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/api/v1/integration",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"integration"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

@@ -6,7 +6,7 @@ describe('POST /shorten', () => {
 
   let server:any;
   beforeAll(async () => {
-    const mod = await import('../../main/adapters/express-server');
+    const mod = await import('../../main/adapters/express/server');
     server = (mod as any).default;
   });
 

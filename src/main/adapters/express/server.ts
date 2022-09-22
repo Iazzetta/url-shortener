@@ -1,12 +1,20 @@
 import express from 'express'
-import { notFound } from '../../presentation/contracts/response';
-import { Credentials } from '../../presentation/helpers/credentials';
-import { makeCreateShortenerController } from '../factories/mongodb/create-shortener';
-import { makeRedirectShortenerController } from '../factories/mongodb/redirect-shortener';
+import { notFound } from '../../../presentation/contracts/response';
+import { Credentials } from '../../../presentation/helpers/credentials';
+import { makeCreateShortenerController } from '../../factories/mongodb/create-shortener';
+import { makeRedirectShortenerController } from '../../factories/mongodb/redirect-shortener';
+import { RedisManager } from './controllers/redis';
 
+// express
 const app = express()
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// redis
+const redisManager = new RedisManager({
+    url: Credentials.RedisUrl
+})
+
 
 /**
  * @api {post} /shorten Shorten long url
@@ -39,15 +47,22 @@ app.post('/shorten', async (req: express.Request, res:express.Response) => {
  app.get('/:short_url', async (req: express.Request, res:express.Response) => {
     const short_url = req.params.short_url;
     const controller = makeRedirectShortenerController()
-    const httpResponse = await controller.handle(`${Credentials.PrefixUrl}${short_url}`)
-    if (httpResponse.statusCode == 200)
-        res.status(301).redirect(httpResponse.data);
-    else
-        res.status(404).json(notFound("URL not found"))
+    const cachedURL = await redisManager.get(short_url);
+    if (cachedURL) {
+        res.status(301).redirect(cachedURL);
+    } else {
+        const httpResponse = await controller.handle(`${Credentials.PrefixUrl}${short_url}`)
+        if (httpResponse.statusCode == 200){
+            await redisManager.set(short_url, httpResponse.data);
+            res.status(301).redirect(httpResponse.data);
+        }
+        else
+            res.status(404).json(notFound("URL not found"))
+    }
 });
 
-const api = app.listen(Credentials.EXPRESS_PORT, async () => {
-    console.log(`Running at http://localhost:${Credentials.EXPRESS_PORT}`)
+const api = app.listen(Credentials.Port, async () => {
+    console.log(`Running at http://localhost:${Credentials.Port}`)
 })
 
 export default api;
