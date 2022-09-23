@@ -58,7 +58,7 @@ REDIS_URL="redis://redis:6379"
 ## Run Production
 
 ```bash
-$ docker-compose up --build
+$ docker-compose up --build --scale url-shortener=5
 ```
 
 ## Run Development
