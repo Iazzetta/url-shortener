@@ -4,6 +4,7 @@ import { Credentials } from '../../../presentation/helpers/credentials';
 import { makeCreateShortenerController } from '../../factories/mongodb/create-shortener';
 import { makeRedirectShortenerController } from '../../factories/mongodb/redirect-shortener';
 import { RedisManager } from './controllers/redis';
+import os from 'os';
 
 // express
 const app = express()
@@ -62,7 +63,7 @@ app.post('/shorten', async (req: express.Request, res:express.Response) => {
 });
 
 const api = app.listen(Credentials.Port, async () => {
-    console.log(`Running at http://localhost:${Credentials.Port}`)
+    console.log(`Running at http://${os.hostname()}:${Credentials.Port}`)
 })
 
 export default api;
